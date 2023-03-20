@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.store.mapper.BookMapper">
+	
+	<!-- 전체 도서목록 조회 -->
+	<select id="getAllBooks" parameterType="map" resultType="Book">
+		select
+			book_id					as id,
+			book_title				as title,
+			book_author				as author,
+			book_publisher			as publisher,
+			book_price				as price,
+			book_discount_price		as discountPrice,
+			book_stock				as stock,
+			book_on_sell			as onSell,
+			book_review_count		as reviewCount,
+			book_review_score		as reviewScore,
+			book_created_date		as createdDate,
+			book_updated_date		as updatedDate
+		from
+			books
+	</select>
+	
+	<!-- 도서목록 갯수 조회 -->
+	<select id="getTotalRows" resultType="int">
+		select
+			count(*)
+		from
+			books
+	</select>
+</mapper>
