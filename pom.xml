@@ -19,7 +19,7 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
-		<!-- <dependency>
+	<!-- 	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency> -->
@@ -27,7 +27,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
-	<!-- 	<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency> -->
@@ -39,11 +39,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.3.0</version>
-		</dependency> -->
+		</dependency>
 		<!-- jsp용 spring-security-tag 라이브러리 의존성 추가 -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -66,11 +66,8 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- 
-		<dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-tomcat</artifactId> 
-			<scope>provided</scope> 
-		</dependency> 
-		-->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-tomcat</artifactId> 
+			<scope>provided</scope> </dependency> -->
 		<!-- jsp를 지원하는 내장형 톰캣 라이브러리 의존성 추가 -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>

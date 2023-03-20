@@ -4,14 +4,14 @@ server:
 logging:
   level:
     root: info                    # 애플리케이션의 기본 로그출력 레벨을 info로 설정
-    '[com.example.mapper]': trace # com.example.mapper 패키지의 로그출력 레벨을 trace로 지정
+    '[com.store.mapper]': trace # com.store.mapper 패키지의 로그출력 레벨을 trace로 지정
                                   # mybatis가 실행하는 sql과 실행결과를 출력하게 한다.
     '[org.springframework.security]':  debug
 spring:
   datasource:                     # 커넥션 풀 설정 지정
     url: jdbc:oracle:thin:@localhost:1521:xe
     driver-class-name: oracle.jdbc.OracleDriver
-    username: final
+    username: bookstore
     password: zxcv1234
   mvc:                            # spring mvc 관련 설정 지정
     view:                         # 뷰 페이지의 경로를 지정
@@ -24,3 +24,10 @@ spring:
   profiles:
     include:
     - auth
+mybatis:
+  mapper-locations:
+  - mybatis/mappers/*.xml
+  type-aliases-package: com.store.vo,com.store.dto,com.store.paging
+  configuration:
+    jdbc-type-for-null: 'NULL' 
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
