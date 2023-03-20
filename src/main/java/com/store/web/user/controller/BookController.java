@@ -24,7 +24,9 @@ public class BookController {
 	public String list(@RequestParam(name = "page", required = false, defaultValue = "1") int page, 
 						BookSearch bookSearch, Model model) {
 		Map<String, Object> result = bookService.getAllBooks(page, bookSearch);
+		// 도서 목록
 		model.addAttribute("bookList", result.get("bookList"));
+		// 페이징 처리
 		model.addAttribute("pagination", result.get("pagination"));
 
 		return "book/list";

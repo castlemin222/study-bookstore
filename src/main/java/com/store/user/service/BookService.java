@@ -27,6 +27,10 @@ public class BookService {
 		
 		// 페이징처리에 필요한 Map<String, Object>객체 생성
 		Map<String, Object> param = new HashMap<>();
+		// 페이징 처리
+		param.put("begin", pagination.getBegin());
+		param.put("end", pagination.getEnd());
+		// 검색조건에 해당하는 도서목록
 		param.put("sort", bookSearch.getSort());
 		param.put("opt", bookSearch.getOpt());
 		param.put("keyword", bookSearch.getKeyword());
