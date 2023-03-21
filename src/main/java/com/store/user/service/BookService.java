@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.store.mapper.BookMapper;
 import com.store.utils.Pagination;
+import com.store.vo.Book;
 import com.store.web.request.BookSearch;
 
 @Service
@@ -21,9 +22,15 @@ public class BookService {
 	// 전체 도서목록 조회
 	public Map<String, Object> getAllBooks(int page, BookSearch bookSearch) {
 		
-		// 총 프로그램 갯수 조회
-		int totalRows = bookMapper.getTotalRows();
-		Pagination pagination = new Pagination(page, totalRows);
+		// 검색조건에 해당하는 프로그램 갯수 조회
+		Map<String, Object> rows = new HashMap<>();
+		rows.put("sort", bookSearch.getSort());
+		rows.put("opt", bookSearch.getOpt());
+		rows.put("keyword", bookSearch.getKeyword());
+		int totalRows = bookMapper.getTotalRows(rows);
+		
+		// Pagination 객체 생성 
+		Pagination pagination = new Pagination(page, totalRows, 12);
 		
 		// 페이징처리에 필요한 Map<String, Object>객체 생성
 		Map<String, Object> param = new HashMap<>();
