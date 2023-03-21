@@ -49,4 +49,9 @@ public class BookService {
 		
 		return result;
 	}
+	
+	// 도서아이디로 도서 정보 조회
+	public Book getBookById(int id) {
+		return bookMapper.getBookById(id);
+	}
 }
