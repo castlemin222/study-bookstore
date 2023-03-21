@@ -1,4 +1,4 @@
-package com.store.web.user.controller;
+package com.store.web.controller.user;
 
 import java.util.Map;
 
@@ -31,6 +31,15 @@ public class BookController {
 		model.addAttribute("pagination", result.get("pagination"));
 
 		return "book/list";
+	}
+	
+	// 도서 상세 페이지
+	@GetMapping("/detail")
+	public String detail(@RequestParam(name = "id") int id, Model model) {
+		// 도서 아이디로 도서 정보 조회
+		Book book = bookService.getBookById(id);
+		model.addAttribute("book", book);
+		return "book/detail";
 	}
 	
 }

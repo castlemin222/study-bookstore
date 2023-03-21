@@ -14,4 +14,6 @@ public interface BookMapper {
 	List<Book> getAllBooks(Map<String, Object> param);
 	// 검색조건에 해당하는 도서목록 갯수 조회
 	int getTotalRows(Map<String, Object> rows);
+	// 도서아이디로 도서 정보 조회
+	Book getBookById(int id);
 }
