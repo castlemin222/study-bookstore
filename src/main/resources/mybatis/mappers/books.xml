@@ -9,18 +9,21 @@
 		from(
 			select
 				row_number() over(<choose>
-										<when test="sort == 'recent'">
-											order by book_created_date desc
-										</when>
-										<when test="sort == 'title'">
-											order by book_title desc
-										</when>
-										<when test="sort == 'low'">
-											order by book_discount_price asc
-										</when>
-										<when test="sort == 'high'">
-											order by book_discount_price desc
-										</when>
+									<when test="sort == 'recent'">
+										order by book_created_date desc
+									</when>
+									<when test="sort == 'title'">
+										order by book_title desc
+									</when>
+									<when test="sort == 'low'">
+										order by book_discount_price asc
+									</when>
+									<when test="sort == 'high'">
+										order by book_discount_price desc
+									</when>
+									<otherwise>
+										order by book_id desc
+									</otherwise>
 								</choose>)	as row_numbers,
 				book_id						as id,
 				book_title					as title,
