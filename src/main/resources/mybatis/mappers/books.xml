@@ -8,30 +8,81 @@
 			*
 		from(
 			select
-				row_number() over(order by book_id desc) as row_numbers,
-				book_id					as id,
-				book_title				as title,
-				book_author				as author,
-				book_publisher			as publisher,
-				book_price				as price,
-				book_discount_price		as discountPrice,
-				book_stock				as stock,
-				book_on_sell			as onSell,
-				book_review_count		as reviewCount,
-				book_review_score		as reviewScore,
-				book_created_date		as createdDate,
-				book_updated_date		as updatedDate
+				row_number() over(<choose>
+										<when test="sort == 'recent'">
+											order by book_created_date desc
+										</when>
+										<when test="sort == 'title'">
+											order by book_title desc
+										</when>
+										<when test="sort == 'low'">
+											order by book_discount_price asc
+										</when>
+										<when test="sort == 'high'">
+											order by book_discount_price desc
+										</when>
+								</choose>)	as row_numbers,
+				book_id						as id,
+				book_title					as title,
+				book_author					as author,
+				book_publisher				as publisher,
+				book_price					as price,
+				book_discount_price			as discountPrice,
+				book_stock					as stock,
+				book_on_sell				as onSell,
+				book_review_count			as reviewCount,
+				book_review_score			as reviewScore,
+				book_created_date			as createdDate,
+				book_updated_date			as updatedDate
 			from
-				books)
-			where
-				row_numbers between #{begin} and #{end}
+				books
+			<where>
+				<choose>
+					<when test="opt == 'title'">
+						book_title like '%' || #{keyword} || '%'
+					</when>
+					<when test="opt == 'author'">
+						book_author	like '%' || #{keyword} || '%'
+					</when>
+					<when test="opt == 'publisher'">
+						book_publisher	like '%' || #{keyword} || '%'
+					</when>
+				</choose>
+				<if test="keyword != null">
+					and (book_title like '%' || #{keyword} || '%'
+					or book_author	like '%' || #{keyword} || '%'
+					or book_publisher	like '%' || #{keyword} || '%')
+				</if>
+			</where>
+			)
+		where
+			row_numbers between #{begin} and #{end}
 	</select>
 	
 	<!-- 도서목록 갯수 조회 -->
-	<select id="getTotalRows" resultType="int">
+	<select id="getTotalRows" parameterType="map" resultType="int">
 		select
 			count(*)
 		from
 			books
+		<where>
+			<choose>
+				<when test="opt == 'title'">
+					book_title like '%' || #{keyword} || '%'
+				</when>
+				<when test="opt == 'author'">
+					book_author	like '%' || #{keyword} || '%'
+				</when>
+				<when test="opt == 'publisher'">
+					book_publisher	like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+			<if test="keyword != null">
+				and (book_title like '%' || #{keyword} || '%'
+				or book_author	like '%' || #{keyword} || '%'
+				or book_publisher	like '%' || #{keyword} || '%')
+			</if>
+		</where>
 	</select>
+	
 </mapper>

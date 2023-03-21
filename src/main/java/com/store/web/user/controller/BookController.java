@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.store.user.service.BookService;
+import com.store.vo.Book;
 import com.store.web.request.BookSearch;
 
 @Controller
@@ -31,4 +32,5 @@ public class BookController {
 
 		return "book/list";
 	}
+	
 }
