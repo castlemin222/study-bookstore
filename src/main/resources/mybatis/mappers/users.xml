@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.store.mapper.UserMapper">
+	
+	<!-- 사용자 아이디로 사용자 정보 조회 -->
+	<select id="getUserById" parameterType="string" resultType="User">
+		select
+			user_id				as id,
+			user_email			as email,
+			user_password		as encryptPassword,
+			user_name			as name,
+			user_tel			as tel,
+			user_point			as point,
+			user_disabled		as disabled,
+			user_created_date	as createdDate,
+			user_updated_date	as updatedDate
+		from
+			users
+		where
+			user_id = #{value}
+	</select>
+	
+	<!-- 사용자 권한 조회 -->
+	<select id="getUserRoleById" parameterType="string" resultType="UserRole">
+		select
+			user_id		as id,
+			user_role	as name
+		from
+			user_roles
+		where
+			user_id = #{value}
+	</select>
+	
+	<!-- 사용자 정보 등록 -->
+	<insert id="insertUser" parameterType="User">
+		insert into users
+			(user_id, user_email, user_password, user_name, user_tel)
+		values
+			(#{id}, #{email}, #{encryptPassword}, #{name}, #{tel})
+	</insert>
+	
+</mapper>
