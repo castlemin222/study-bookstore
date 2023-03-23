@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("사용자 정보가 없습니다.");
 		}
-		if ("Y".equals(user.getDisabled())) {
+		if ("N".equals(user.getEnabled())) {
 			throw new UsernameNotFoundException("탈퇴한 사용자입니다.");
 		}
 		// 사용자 권한 조회

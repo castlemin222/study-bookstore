@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
-<%@ include file="common/tags.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,7 +19,14 @@
 	</div>
 	<div class="row mb-3">
 		<div class="col-12">
-			<p>아이디와 비밀번호를 입력하고 로그인 버튼을 클릭하세요</p>
+			<div>
+				<p>아이디와 비밀번호를 입력하고 로그인 버튼을 클릭하세요</p>
+			</div>
+			<c:if test="${param.error eq 'fail' }">
+				<div class="alert alert-danger">
+   					<strong>로그인 실패</strong> 아이디 혹은 비밀번호가 유효하지 않습니다.
+ 				</div>
+			</c:if>
 			<form id="form-register" class="border bg-light p-3" method="post" action="/login">
 				<div class="mb-3">
 					<label class="form-label">아이디</label>

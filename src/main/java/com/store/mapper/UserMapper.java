@@ -16,4 +16,6 @@ public interface UserMapper {
 	public List<UserRole> getUserRoleById(String userId);
 	// 사용자 정보 등록
 	public void insertUser(User user);
+	// 사용자 권한 등록
+	public void insertUserRole(String userId);
 }

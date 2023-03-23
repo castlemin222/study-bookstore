@@ -18,7 +18,7 @@ public class User {
 	private String name;
 	private String tel;
 	private int point;
-	private String disabled;
+	private String enabled;
 	private Date createdDate;
 	private Date updatedDate;
 }

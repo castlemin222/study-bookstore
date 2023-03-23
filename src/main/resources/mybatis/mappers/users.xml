@@ -11,7 +11,7 @@
 			user_name			as name,
 			user_tel			as tel,
 			user_point			as point,
-			user_disabled		as disabled,
+			user_enabled		as enabled,
 			user_created_date	as createdDate,
 			user_updated_date	as updatedDate
 		from
@@ -24,7 +24,7 @@
 	<select id="getUserRoleById" parameterType="string" resultType="UserRole">
 		select
 			user_id		as id,
-			user_role	as name
+			role_name	as name
 		from
 			user_roles
 		where
@@ -39,4 +39,11 @@
 			(#{id}, #{email}, #{encryptPassword}, #{name}, #{tel})
 	</insert>
 	
+	<!-- 사용자 권한 등록 -->
+	<insert id="insertUserRole" parameterType="String">
+		insert into user_roles
+			(user_id)
+		values
+			(#{value})
+	</insert>
 </mapper>
