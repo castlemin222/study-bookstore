@@ -21,6 +21,9 @@
 		</ul>
 	</div>
 </nav>
+<form id="form-logout" method="post" action="/logout">
+	<sec:csrfInput />
+</form>
 <script>
 $(function() {
 	$("#link-logout").click(function(e) {
