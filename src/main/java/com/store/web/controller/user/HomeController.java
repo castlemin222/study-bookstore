@@ -39,10 +39,11 @@ public class HomeController {
 	public String success() {
 		return "success";
 	}
-	
+
 	// 로그인 화면 요청
 	@GetMapping("/login")
 	public String loginform() {
 		return "login-form";
 	}
+	
 }
