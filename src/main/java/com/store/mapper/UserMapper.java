@@ -12,6 +12,8 @@ public interface UserMapper {
 
 	// 사용자 아이디로 사용자 정보 조회
 	public User getUserById(String userId);
+	// 사용자 이메일로 사용자 정보 조회
+	public User getUserByEmail(String email);
 	// 사용자 권한 조회
 	public List<UserRole> getUserRoleById(String userId);
 	// 사용자 정보 등록

@@ -20,6 +20,24 @@
 			user_id = #{value}
 	</select>
 	
+	<!-- 사용자 이메일로 사용자 정보 조회 -->
+	<select id="getUserByEmail" parameterType="string" resultType="User">
+		select
+			user_id				as id,
+			user_email			as email,
+			user_password		as encryptPassword,
+			user_name			as name,
+			user_tel			as tel,
+			user_point			as point,
+			user_enabled		as enabled,
+			user_created_date	as createdDate,
+			user_updated_date	as updatedDate
+		from
+			users
+		where
+			user_email = #{value}
+	</select>
+	
 	<!-- 사용자 권한 조회 -->
 	<select id="getUserRoleById" parameterType="string" resultType="UserRole">
 		select
