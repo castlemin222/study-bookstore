@@ -16,7 +16,7 @@
 		<div class="col-12">
 			<div class="border p-3 bg-light">
 				<h1 class="mb-4">회원가입 완료</h1>
-				<p>회원가입이 완료되었습니다.</p>
+				<p>회원가입이 완료되었습니다.</p> 
 			</div>
 		</div>
 	</div>
