@@ -1,24 +1,25 @@
-package com.store.web.controller.user;
+package com.store.controller.user;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.store.user.service.BookService;
+import com.store.request.BookSearch;
+import com.store.service.user.BookService;
 import com.store.vo.Book;
-import com.store.web.request.BookSearch;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/book")
 public class BookController {
 	
-	@Autowired
-	private BookService bookService;
+	private final BookService bookService;
 
 	// 전체 도서목록 조회
 	@GetMapping("/list")

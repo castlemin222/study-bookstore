@@ -1,18 +1,20 @@
-package com.store.web.controller.user;
+package com.store.controller.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.store.user.service.UserService;
-import com.store.web.request.UserRegisterForm;
+import com.store.request.UserRegisterForm;
+import com.store.service.user.UserService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class HomeController {
 
-	@Autowired
-	private UserService userService;
+	private final UserService userService;
 	
 	// 홈 화면 요청
 	@GetMapping("/")
@@ -22,7 +24,9 @@ public class HomeController {
 	
 	// 회원가입 화면 요청
 	@GetMapping("/register")
-	public String registerForm() {
+	public String registerForm(Model model) {
+		model.addAttribute("registerFrom", new UserRegisterForm());
+		
 		return "register-form";
 	}
 	
