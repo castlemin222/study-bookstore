@@ -1,10 +1,15 @@
 package com.store.controller.user;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.store.exception.ApplicationException;
 import com.store.request.UserRegisterForm;
 import com.store.service.user.UserService;
 
@@ -32,10 +37,19 @@ public class HomeController {
 	
 	// 회원가입
 	@PostMapping("/register")
-	public String register(UserRegisterForm form) {
-		userService.insertUser(form);
+	public String register(@ModelAttribute(name = "registerFrom") @Valid UserRegisterForm form, BindingResult errors) {
 		
-		return "redirect:success";
+		if (errors.hasErrors()) {
+			return "register-form";
+		}
+		
+		try {
+			userService.insertUser(form);
+			return "redirect:success";
+		} catch (ApplicationException e) {
+			errors.rejectValue("id", null, e.getMessage());
+			return "register-form";
+		}
 	}
 	
 	// 회원가입 성공 화면
