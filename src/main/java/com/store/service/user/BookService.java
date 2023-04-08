@@ -1,23 +1,29 @@
-package com.store.user.service;
+package com.store.service.user;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.store.dto.ReviewDto;
 import com.store.mapper.BookMapper;
+import com.store.request.BookSearch;
+import com.store.request.ReviewAdd;
 import com.store.utils.Pagination;
 import com.store.vo.Book;
-import com.store.web.request.BookSearch;
+import com.store.vo.Review;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class BookService {
 
-	@Autowired
-	private BookMapper bookMapper;
+	private final BookMapper bookMapper;
 	
 	// 전체 도서목록 조회
 	public Map<String, Object> getAllBooks(int page, BookSearch bookSearch) {
@@ -53,5 +59,18 @@ public class BookService {
 	// 도서아이디로 도서 정보 조회
 	public Book getBookById(int id) {
 		return bookMapper.getBookById(id);
+	}
+
+	// 도서아이디에 해당하는 리뷰 조회
+	public List<ReviewDto> getAllReview(int bookId) {
+		return bookMapper.getAllReview(bookId);
+	}
+	
+	// 리뷰 추가
+	public void insertReview(String userId, ReviewAdd reviewAdd) {
+		Review review = new Review();
+		BeanUtils.copyProperties(reviewAdd, review);
+		review.setUserId(userId);
+		bookMapper.insertReview(review);
 	}
 }
