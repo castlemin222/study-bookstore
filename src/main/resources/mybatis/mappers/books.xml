@@ -109,4 +109,30 @@
 			book_id	= #{value}
 	</select>
 	
+	<!-- 전체 리뷰 조회 -->
+	<select id="getAllReview" parameterType="int" resultType="ReviewDto">
+		select
+			A.review_id					as reviewId,
+			A.review_content			as content,
+			A.review_score				as score,
+			A.review_created_date		as createdDate,
+			A.review_updated_date		as updatedDate,
+			A.book_id					as bookId,
+			A.user_id					as userId,
+			B.user_name					as userName
+		from
+			reviews A, users B
+		where
+			A.user_id = B.user_id
+	</select>
+	
+	
+	<!-- 리뷰 추가 -->
+	<insert id="insertReview" parameterType="Review">
+		insert into reviews
+			(review_id, review_content, review_score, book_id, user_id)
+		values
+			(reviews_seq.nextval, #{content}, #{score}, #{bookId}, #{userId})
+	</insert>
+	
 </mapper>
