@@ -8,4 +8,4 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%-- 스프링 시큐리티 태그 라이브러리  --%>
-<%-- <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %> --%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
