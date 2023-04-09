@@ -124,6 +124,7 @@
 			reviews A, users B
 		where
 			A.user_id = B.user_id
+			and A.book_id = #{value}
 	</select>
 	
 	
