@@ -17,7 +17,6 @@ import com.store.security.AuthenticatedUser;
 import com.store.security.LoginUser;
 import com.store.service.user.BookService;
 import com.store.vo.Book;
-import com.store.vo.Review;
 
 import lombok.RequiredArgsConstructor;
 

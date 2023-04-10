@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.store.mapper.CartMapper">
+	
+	<!-- 장바구니 추가 -->
+	<insert id="addBook" parameterType="Cart">
+		insert into cart_items
+			(cart_item_id, cart_item_quantity, book_id, user_id)
+		values
+			(cart_items_seq.nextval, #{quantity}, #{bookId}, #{userId})
+	</insert>
+</mapper>
