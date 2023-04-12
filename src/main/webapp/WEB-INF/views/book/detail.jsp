@@ -63,7 +63,7 @@
 								<th>판매여부</th>
 								<td>${book.onSell eq 'Y' ? '판매중' : '판매완료' }</td>
 								<th>재고량</th>
-								<td><fmt:formatNumber value="${book.stock }"/> 권</td>
+								<td><span class="quantity">${book.stock }</span>권</td>
 							</tr>
 						</tbody>
 					</table>
@@ -136,10 +136,6 @@
 			</c:forEach>
 		</div>
 	</div>
-	
-    <div class="row my-3">
-		
-    </div>
 </div>
 <div id="modal-review-form" class="modal" tabindex="-1">
 	<div class="modal-dialog">
@@ -208,6 +204,33 @@
 			$("#form-review").trigger("submit");
 		});
 		
+		// 수량 추가
+		$("#btn-plus-quantity").click(function() {
+			let amount = $(".quantity").text();
+			let quantity = parseInt($("input[name=quantity]").val());
+			if (amount <= quantity) {
+				alert("현재 재고량은 "+amount+"개 입니다.");
+				return false;
+			}
+			$("input[name=quantity]").val(quantity+1);
+		});
+		
+		// 수량 감소
+		$("#btn-minus-quantity").click(function() {
+			let quantity = parseInt($("input[name=quantity]").val());
+			if (quantity <= 1) {
+				alert("1개 이하로 선택할 수 없습니다.");
+				return false;
+			}
+			$("input[name=quantity]").val(quantity-1);
+		});
+		
+		// 카트에 담기 버튼 클릭
+		$("#btn-add-cart").click(function() {
+			let bookId = $("input[name=id]").val();
+			let quantity = $("input[name=quantity]").val();
+			location.href = "/cart/add?bookId="+bookId+"&quantity="+quantity;
+		});
 	})
 </script>
 </body>

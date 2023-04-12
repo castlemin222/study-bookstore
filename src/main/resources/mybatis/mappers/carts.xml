@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.store.mapper.CartMapper">
+	
+	<!-- 장바구니 목록 -->
+	<select id="getAllCart" parameterType="String" resultType="CartDto">
+		select
+			A.cart_item_id			as cartId,
+			A.cart_item_quantity	as quantity,
+			A.book_id				as bookId,
+			A.user_id				as userId,
+			B.book_title			as title,
+			B.book_price			as price,
+			B.book_discount_price	as discountPrice,
+			B.book_stock			as stock
+		from
+			cart_items A, books B
+		where
+			A.book_id = B.book_id
+			and user_id = #{value}
+	</select>
+	
+	<!-- 장바구니 추가 -->
+	<insert id="addBook" parameterType="Cart">
+		insert into cart_items
+			(cart_item_id, cart_item_quantity, book_id, user_id)
+		values
+			(cart_items_seq.nextval, #{quantity}, #{bookId}, #{userId})
+	</insert>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteByBookId" parameterType="int">
+		delete from
+			cart_items
+		where
+			cart_item_id = #{value}
+	</delete>
+</mapper>
